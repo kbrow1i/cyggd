@@ -1,6 +1,9 @@
 NAME="gd"
 VERSION=2.2.5
 RELEASE=1
+
+DEPEND="libwebp-devel libimagequant-devel"
+
 CATEGORY="Libs"
 SUMMARY="A library for the dynamic creation of images by programmers"
 DESCRIPTION="GD is an open source code library for the dynamic creation of images
