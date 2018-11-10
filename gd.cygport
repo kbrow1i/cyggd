@@ -1,8 +1,11 @@
 NAME="gd"
-VERSION=2.2.5
-RELEASE=2
+VERSION=2.2.6
+RELEASE=0.1
 
-DEPEND="libwebp-devel libimagequant-devel"
+GIT_URI="https://github.com/libgd/libgd.git"
+inherit git
+
+DEPEND="libwebp-devel libimagequant-devel libraqm-devel"
 
 CATEGORY="Libs"
 SUMMARY="A library for the dynamic creation of images by programmers"
@@ -14,11 +17,8 @@ to use on the web, the most common applications of GD involve web site
 development."
 
 HOMEPAGE="https://libgd.github.io/"
-SRC_URI="https://github.com/libgd/libgd/releases/download/gd-${VERSION}/libgd-${VERSION}.tar.xz"
-SRC_DIR="libgd-${VERSION}"
-
-PATCH_URI+=" https://src.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.2.5-gdImageBmpPtr-double-free.patch"
-PATCH_URI+=" https://src.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.2.5-upstream.patch"
+# SRC_URI="https://github.com/libgd/libgd/releases/download/gd-${VERSION}/libgd-${VERSION}.tar.xz"
+# SRC_DIR="libgd-${VERSION}"
 
 PKG_NAMES="gd libgd3 libgd-devel"
 
@@ -35,10 +35,10 @@ libgd3_CONTENTS="usr/bin/cyggd-3.dll"
 
 libgd_devel_SUMMARY="${SUMMARY} (development)"
 libgd_devel_CONTENTS="
-  usr/bin/*-config
   usr/include/
   usr/lib/
 "
+DIFF_EXCLUDES="config.hin"
 
 src_compile() {
 	cd ${S}
