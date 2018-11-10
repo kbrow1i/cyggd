@@ -1,5 +1,5 @@
 NAME="gd"
-VERSION=2.2.6
+VERSION=2.3.0
 RELEASE=0.1
 
 GIT_URI="https://github.com/libgd/libgd.git"
