@@ -1,6 +1,6 @@
 NAME="gd"
 VERSION=2.2.5
-RELEASE=1
+RELEASE=2
 
 DEPEND="libwebp-devel libimagequant-devel"
 
@@ -16,6 +16,9 @@ development."
 HOMEPAGE="https://libgd.github.io/"
 SRC_URI="https://github.com/libgd/libgd/releases/download/gd-${VERSION}/libgd-${VERSION}.tar.xz"
 SRC_DIR="libgd-${VERSION}"
+
+PATCH_URI+=" https://src.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.2.5-gdImageBmpPtr-double-free.patch"
+PATCH_URI+=" https://src.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.2.5-upstream.patch"
 
 PKG_NAMES="gd libgd3 libgd-devel"
 
