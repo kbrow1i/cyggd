@@ -1,9 +1,6 @@
 NAME="gd"
 VERSION=2.2.5
-RELEASE=2
-
-DEPEND="libwebp-devel libimagequant-devel"
-
+RELEASE=1
 CATEGORY="Libs"
 SUMMARY="A library for the dynamic creation of images by programmers"
 DESCRIPTION="GD is an open source code library for the dynamic creation of images by programmers.
@@ -13,11 +10,6 @@ restricted to use on the web, the most common applications of GD involve web sit
 HOMEPAGE="https://libgd.github.io/"
 SRC_URI="https://github.com/libgd/libgd/releases/download/gd-${VERSION}/libgd-${VERSION}.tar.xz"
 SRC_DIR="libgd-${VERSION}"
-
-PATCH_URI+=" https://src.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.2.5-gdImageBmpPtr-double-free.patch"
-PATCH_URI+=" https://src.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.2.5-upstream.patch"
-
-PATCH_URI+=" fix_gdmalloc_alignment.patch"
 
 PKG_NAMES="gd libgd3 libgd-devel"
 gd_CATEGORY="Graphics"
@@ -37,3 +29,14 @@ libgd_devel_CONTENTS="
   usr/include/
   usr/lib/
 "
+
+DIFF_EXCLUDES="Makefile.in"
+
+src_compile() {
+	cd ${S}
+#	cygautoreconf
+	lndirs
+	cd ${B}
+	cygconf
+	cygmake
+}
