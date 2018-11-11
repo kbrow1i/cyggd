@@ -20,6 +20,8 @@ SRC_DIR="libgd-${VERSION}"
 PATCH_URI+=" https://src.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.2.5-gdImageBmpPtr-double-free.patch"
 PATCH_URI+=" https://src.fedoraproject.org/cgit/rpms/gd.git/plain/gd-2.2.5-upstream.patch"
 
+PATCH_URI+=" fix_gdmalloc_alignment.patch"
+
 PKG_NAMES="gd libgd3 libgd-devel"
 
 gd_CATEGORY="Graphics"
