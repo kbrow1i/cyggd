@@ -20,6 +20,8 @@ HOMEPAGE="https://libgd.github.io/"
 # SRC_URI="https://github.com/libgd/libgd/releases/download/gd-${VERSION}/libgd-${VERSION}.tar.xz"
 # SRC_DIR="libgd-${VERSION}"
 
+PATCH_URI+=" fix_gdmalloc_alignment.patch"
+
 PKG_NAMES="gd libgd3 libgd-devel"
 
 gd_CATEGORY="Graphics"
