@@ -41,12 +41,3 @@ libgd_devel_CONTENTS="
   usr/include/
   usr/lib/
 "
-
-src_compile() {
-	cd ${S}
-	cygautoreconf
-	lndirs
-	cd ${B}
-	cygconf
-	cygmake
-}
