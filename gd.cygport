@@ -20,7 +20,7 @@ HOMEPAGE="https://libgd.github.io/"
 # SRC_URI="https://github.com/libgd/libgd/releases/download/gd-${VERSION}/libgd-${VERSION}.tar.xz"
 # SRC_DIR="libgd-${VERSION}"
 
-PATCH_URI+=" fix_gdmalloc_alignment.patch"
+PATCH_URI+=" 0001-Fix-479-Provide-a-suitable-malloc-function-to-liq.patch"
 
 PKG_NAMES="gd libgd3 libgd-devel"
 

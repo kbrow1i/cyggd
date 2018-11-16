@@ -1,0 +1,43 @@
+From 529c471f7b574f5e6bf7d75cde1dd89f7b26a2cf Mon Sep 17 00:00:00 2001
+From: Ken Brown <kbrown@cornell.edu>
+Date: Mon, 12 Nov 2018 13:48:46 -0500
+Subject: [PATCH] Fix #479: Provide a suitable malloc function to liq
+
+liq requires 16 byte alignment, which gdMalloc() doesn't guarantee.
+Define and use a new malloc16() function when building with liq.
+---
+ src/gd_topal.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/src/gd_topal.c b/src/gd_topal.c
+index 5178277..5ac226a 100644
+--- a/src/gd_topal.c
++++ b/src/gd_topal.c
+@@ -1523,6 +1523,15 @@ static void free_truecolor_image_data(gdImagePtr oim)
+ 	oim->tpixels = 0;
+ }
+ 
++#ifdef HAVE_LIBIMAGEQUANT
++/* liq requires 16 byte aligned heap memory */
++static void *malloc16(size_t size)
++{
++	void *p;
++	return posix_memalign(&p, 16, size) == 0 ? p : NULL;
++}
++#endif
++
+ /*
+  * Module initialization routine for 2-pass color quantization.
+  */
+@@ -1601,7 +1610,7 @@ static int gdImageTrueColorToPaletteBody (gdImagePtr oim, int dither, int colors
+ #ifdef HAVE_LIBIMAGEQUANT
+ 	if (oim->paletteQuantizationMethod == GD_QUANT_DEFAULT ||
+ 	        oim->paletteQuantizationMethod == GD_QUANT_LIQ) {
+-		liq_attr *attr = liq_attr_create_with_allocator(gdMalloc, gdFree);
++		liq_attr *attr = liq_attr_create_with_allocator(malloc16, free);
+ 		liq_image *image;
+ 		liq_result *remap;
+ 		int remapped_ok = 0;
+-- 
+2.17.0
+
