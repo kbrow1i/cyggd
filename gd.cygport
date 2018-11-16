@@ -41,3 +41,9 @@ libgd_devel_CONTENTS="
   usr/lib/
 "
 DIFF_EXCLUDES="config.hin"
+
+# Avoid rounding errors.  See https://github.com/libgd/libgd/issues/480.
+if [ "${ARCH}" == i686 ]
+then
+   CFLAGS+=" -msse -mfpmath=sse"
+fi
